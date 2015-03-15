@@ -1,0 +1,39 @@
+{
+  "name": "youtube-parser",
+  "version": "1.0.0",
+  "description": "A tool to extract URLs and format info from YouTube page.",
+  "main": "lib/index.js",
+  "bin": {
+    "youtube-parser": "bin/youtube-parser.js"
+  },
+  "scripts": {
+    "lint": "eslint lib/*.js",
+    "test": "jasmine",
+    "test-browser": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuu/youtube-parser"
+  },
+  "author": "Kuu Miyazaki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kuu/youtube-parser/issues"
+  },
+  "homepage": "https://github.com/kuu/youtube-parser",
+  "dependencies": {
+    "bluebird": "^2.9.14",
+    "xhr2": "^0.1.2",
+    "yargs": "^3.5.4"
+  },
+  "devDependencies": {
+    "eslint": "^0.17.0",
+    "jasmine": "^2.2.1",
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-bro": "^0.11.1",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-cli": "0.0.4",
+    "karma-jasmine": "^0.3.5"
+  }
+}
