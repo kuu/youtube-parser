@@ -2,6 +2,14 @@
 A tool to extract URLs and format info from YouTube page.
 This is almost based on the node-ytdl-core by @fent, just attempting to make it work in browser as well.
 
+##Install
+
+```
+$ git clone git@github.com:kuu/youtube-parser.git
+$ cd youtube-parser
+$ npm install
+```
+
 ##CLI
 
 ```
@@ -15,12 +23,12 @@ Examples:
 Options:
   -h, --help           Print help
   -v, --version        Print version
-  -q, --quality        List all URLs of video with the specified quality {small | medium | large}
-  -c, --container      List all URLs of video with the specified container format {mp4 | webm | flv | 3gp}
-  -e, --encoding       List all URLs of video with the specified video encoding {VP8 | H.264 | Sorenson H.283 | MPEG-4 Visual}
-  -a, --audioEncoding  List all URLs of video with the specified audio encoding {mp3 | aac | vorbis}
-  --videoOnly          List all URLs of video that consists of only a video track
-  --audioOnly          List all URLs of video that consists of only an audio track
+  -q, --quality        List URLs of video with the specified quality {small | medium | large}
+  -c, --container      List URLs of video with the specified container format {mp4 | webm | flv | 3gp}
+  -e, --encoding       List URLs of video with the specified video encoding {VP8 | H.264 | Sorenson H.283 | MPEG-4 Visual}
+  -a, --audioEncoding  List URLs of video with the specified audio encoding {mp3 | aac | vorbis}
+  --videoOnly          List URLs of video that consists of only a video track
+  --audioOnly          List URLs of video that consists of only an audio track
 ```
 
 ##API
@@ -35,7 +43,7 @@ Promise getMetadata(string url)
 
 ### getURL
 ```
-Promise getMetadata(string url, object format)
+Promise getURL(string url, object format)
 ```
 
 * url - 'watch video' page on YouTube.
@@ -50,12 +58,14 @@ youTubeParser.getMetadata('https://www.youtube.com/watch?v=C_vqnySNhQ0')
 .then(
   function (metadata) {
     // Access video info.
+    console.log(metadata.keywords);
   }
 );
 
 youTubeParser.getURL('https://youtu.be/C_vqnySNhQ0', {quality: 'medium', container: 'mp4'})
 .then(
   function (urlList) {
+    // Access URLs.
     console.log(urlList[0]);
   }
 );
