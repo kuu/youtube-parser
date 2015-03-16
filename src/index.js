@@ -7,8 +7,10 @@ var Promise = require('bluebird'),
 
 function getVideoID(url) {
   var urlObj = URL.parseURL(url);
-  var id = urlObj.hostname === 'youtu.be' ? urlObj.path.slice(1) : urlObj.query.v;
-  return id;
+  if (urlObj) {
+    return urlObj.hostname === 'youtu.be' ? urlObj.path.slice(1) : urlObj.query.v;
+  }
+  return null;
 }
 
 function extractConfigData(html) {
