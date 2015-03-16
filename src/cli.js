@@ -2,8 +2,9 @@
 
 var argv = require('yargs').argv,
     pkg = require('../package.json'),
-    youTubeParser = require('./index.js'),
-    url, format, quality, container, encoding, audioEncoding,
+    youTubeParser = require('./index.js');
+
+var url, format, quality, container, encoding, audioEncoding,
     printHelp = function () {
       var message = 'Usage:\n';
       message += '    youtube-parser url [options]\n\n';

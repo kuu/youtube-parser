@@ -1,15 +1,9 @@
-(function (root, factory) {
-  'use strict';
-  if (typeof exports === 'object') {
-    module.exports = factory();
-  } else if (typeof define === 'function' && define.amd) {
-    define(factory);
-  } else {
-    root.FORMAT = factory();
-  }
-}(this, function () {
-  'use strict';
-return {
+'use strict';
+
+// http://en.wikipedia.org/wiki/YouTube#Quality_and_formats
+
+module.exports = {
+
   '5': {
     container: 'flv',
     resolution: '240p',
@@ -592,5 +586,5 @@ return {
     audioEncoding: 'aac',
     audioBitrate: 24
   }
+
 };
-}));

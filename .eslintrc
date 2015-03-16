@@ -4,6 +4,8 @@
     "node": true
   },
   "rules": {
-    "quotes": "single"
+    "quotes": "single",
+    "no-undef": false,
+    "camelcase": false
   }
 }
