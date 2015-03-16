@@ -231,20 +231,15 @@ module.exports = {
     });
   },
   getURL: function (url, format) {
-    var self = this;
-
-    return new Promise(function (fulfill, reject) {
-      self.getMetadata(url)
-      .then(
-        function (d) {
-          var best = findBestFormats(d.format, format);
-          if (best && best.length > 0) {
-            fulfill(best);
-          } else {
-            reject(new Error('Requested format not found.'));
-          }
+    return this.getMetadata(url).then(
+      function (d) {
+        var best = findBestFormats(d.format, format);
+        if (best && best.length > 0) {
+          return best;
+        } else {
+          throw new Error('Requested format not found.');
         }
-      );
-    });
+      }
+    );
   }
 };
