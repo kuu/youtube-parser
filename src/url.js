@@ -54,12 +54,12 @@ function parseURL(url) {
   }
 
   urlMatch = url.match(urlRegex);
-  if (urlMatch === null) {
+  if (!urlMatch || urlMatch.length < 5) {
     return null;
   }
 
   authorityMatch = urlMatch[4].match(authorityRegex);
-  if (authorityMatch === null) {
+  if (!authorityMatch) {
     return null;
   }
 
