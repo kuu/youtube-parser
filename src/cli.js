@@ -1,6 +1,6 @@
 'use strict';
 
-var argv = require('yargs').boolean(['dump', 'd']).argv,
+var argv = require('yargs').boolean(['dump', 'd', 'videoOnly', 'audioOnly']).argv,
     pkg = require('../package.json'),
     youTubeParser = require('./index.js');
 
@@ -60,8 +60,8 @@ if (argv.d || argv.dump) {
 
 } else {
 
-  quality = (argv.q || argv.quality) || 'medium';
-  container = (argv.c || argv.container) || 'mp4';
+  quality = (argv.q || argv.quality);
+  container = (argv.c || argv.container);
   encoding = (argv.e || argv.encoding);
   audioEncoding = (argv.a || argv.audioEncoding);
 
@@ -78,7 +78,8 @@ if (argv.d || argv.dump) {
   .then(
     function (results) {
       results.forEach(function (result) {
-        console.log(result.url);
+        console.log('-----');
+        console.log(JSON.stringify(result, null, 4)); // Dump JSON object.
       });
     },
     function (error) {

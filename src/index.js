@@ -149,14 +149,16 @@ function parseFormats(info) {
 
     try {
       data.url = decodeURIComponent(data.url);
+      data.type = decodeURIComponent(data.type);
     } catch (err) {
-      console.warn('could not decode url: ' + err.message);
+      console.warn('Error occurred at decodeURIComponent: ' + err.message);
       data.url = '';
     }
 
     var meta = FORMATS[data.itag];
     if (!meta) {
       console.warn('No format metadata for itag ' + data.itag + ' found');
+      meta = {};
     }
 
     return mergeObjects(data, meta);
@@ -178,19 +180,23 @@ function isHigherQuality(quality, required) {
 function findBestFormats(availableFormats, requestedFormat) {
   var formats = availableFormats.filter(function (format) {
 
-    if (isHigherQuality(format.quality, requestedFormat.quality) === false) {
+    if (requestedFormat.quality !== void 0 &&
+        isHigherQuality(format.quality, requestedFormat.quality) === false) {
       return false;
     }
 
-    if (format.container !== requestedFormat.container) {
+    if (requestedFormat.container !== void 0 &&
+        format.container !== requestedFormat.container) {
       return false;
     }
 
-    if (requestedFormat.encoding && format.encoding !== requestedFormat.encoding) {
+    if (requestedFormat.encoding !== void 0 &&
+        format.encoding !== requestedFormat.encoding) {
       return false;
     }
 
-    if (requestedFormat.audioEncoding && format.audioEncoding !== requestedFormat.audioEncoding) {
+    if (requestedFormat.audioEncoding !== void 0 &&
+        format.audioEncoding !== requestedFormat.audioEncoding) {
       return false;
     }
 
