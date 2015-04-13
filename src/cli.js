@@ -1,6 +1,6 @@
 'use strict';
 
-var argv = require('yargs').argv,
+var argv = require('yargs').boolean(['dump', 'd']).argv,
     pkg = require('../package.json'),
     youTubeParser = require('./index.js');
 
@@ -14,6 +14,7 @@ var url, format, quality, container, encoding, audioEncoding,
       message += 'Options:\n';
       message += '  -h, --help           Print help\n';
       message += '  -v, --version        Print version\n';
+      message += '  -d, --dump           Print the whole metadata\n';
       message += '  -q, --quality        List all URLs of video with the specified quality {small | medium | large}\n';
       message += '  -c, --container      List all URLs of video with the specified container format {mp4 | webm | flv | 3gp}\n';
       message += '  -e, --encoding       List all URLs of video with the specified video encoding {VP8 | H.264 | Sorenson H.283 | MPEG-4 Visual}\n';
@@ -45,29 +46,43 @@ if (!url) {
   return;
 }
 
-quality = (argv.q || argv.quality) || 'medium';
-container = (argv.c || argv.container) || 'mp4';
-encoding = (argv.e || argv.encoding);
-audioEncoding = (argv.a || argv.audioEncoding);
+if (argv.d || argv.dump) {
 
-format = {
-  quality: quality,
-  container: container,
-  encoding: encoding,
-  audioEncoding: audioEncoding,
-  videoOnly: !!argv.videoOnly,
-  audioOnly: !!argv.audioOnly
-};
+  youTubeParser.getMetadata(url)
+  .then(
+    function (result) {
+      console.log(JSON.stringify(result, null, 4)); // Dump JSON object.
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
 
-youTubeParser.getURL(url, format)
-.then(
-  function (results) {
-    results.forEach(function (result) {
-      console.log(result.url);
-    });
-  },
-  function (error) {
-    console.error(error);
-  }
-);
+} else {
 
+  quality = (argv.q || argv.quality) || 'medium';
+  container = (argv.c || argv.container) || 'mp4';
+  encoding = (argv.e || argv.encoding);
+  audioEncoding = (argv.a || argv.audioEncoding);
+
+  format = {
+    quality: quality,
+    container: container,
+    encoding: encoding,
+    audioEncoding: audioEncoding,
+    videoOnly: !!argv.videoOnly,
+    audioOnly: !!argv.audioOnly
+  };
+
+  youTubeParser.getURL(url, format)
+  .then(
+    function (results) {
+      results.forEach(function (result) {
+        console.log(result.url);
+      });
+    },
+    function (error) {
+      console.error(error);
+    }
+  );
+}

@@ -5,9 +5,7 @@ This is almost based on the node-ytdl-core by @fent, but I just wanted to learn 
 ##Install
 
 ```
-$ git clone git@github.com:kuu/youtube-parser.git
-$ cd youtube-parser
-$ npm install
+$ npm install -g youtube-parser
 ```
 
 ##CLI
@@ -23,6 +21,7 @@ Examples:
 Options:
   -h, --help           Print help
   -v, --version        Print version
+  -d, --dump           Print the whole metadata (including metadata other than URLs.)
   -q, --quality        List URLs of video with the specified quality {small | medium | large}
   -c, --container      List URLs of video with the specified container format {mp4 | webm | flv | 3gp}
   -e, --encoding       List URLs of video with the specified video encoding {VP8 | H.264 | Sorenson H.283 | MPEG-4 Visual}
